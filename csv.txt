@@ -1,0 +1,23 @@
+
+#/django/home/boom/appsprospect/management/commands/csvwrit.py
+#http://docs.python.org/2/library/csv.html
+from django.core.management.base import BaseCommand, CommandError
+from appsprospect.models import Modelprospect,Modelpartner
+from django import db
+import commands
+#added for csv write---24-Sep
+import csv
+
+
+class Command(BaseCommand):
+    try:
+    	with open('/Users/macserver/Documents/django/home/boom/prosepct_GB.csv', 'wb') as csvfile:
+    		spamwriter = csv.writer(csvfile, delimiter=';',
+                            quotechar=';', quoting=csv.QUOTE_MINIMAL)
+    		spamwriter.writerow(['Name'] + ['Location'] + ['Channel'] + ['Partner Network name'] + ['Partner Code'] + ['View'] + ['Subscribers'] + ['NumOfYTupload'] + ['Email'] + ['Facebook'] + ['Twitter'] + ['Date Channel found by System'])
+    		for user in Modelprospect.objects.filter(location='GB').order_by('-id'):
+    			user.name=user.name.replace(',','')
+    			spamwriter.writerow([user.name] + [user.location] + [user.channel] + [user.networkname] + [user.network] + [user.view] + [user.subsriber] + [user.numYT] + [user.email] + [user.facebook] + [user.twitter] + [user.created_date])
+                
+    except Exception as e: 
+        print e
