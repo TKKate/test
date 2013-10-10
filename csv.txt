@@ -1,4 +1,4 @@
-#added
+#addeddfdfdfdfdfd
 #/django/home/boom/appsprospect/management/commands/csvwrit.py
 #http://docs.python.org/2/library/csv.html
 from django.core.management.base import BaseCommand, CommandError
